@@ -5,7 +5,9 @@ class UsersController < ApplicationController
         user = User.new(user_params)
         if user.save
           session[:user_id] = user.id
+          BankApp.sign_up(phone_number, params)
           render json:{status: "success"} and return
+
         else
           render json: {errors:{error_type:'invalid_params', error_description: user.errors.full_messages}}, status: :unprocessable_entity and return
         end

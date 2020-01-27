@@ -13,6 +13,7 @@ class PagesController < ApplicationController
 
 	private
 	def forward_request
+		request.headers["phone-number"] = @user.phone_number
 		original_fullpath = request.original_fullpath
 		original_path = request.original_fullpath.gsub("/#{params[:resource]}", "")
 		url = "localhost:4000" #can replace it with server url in this case with bank app url
