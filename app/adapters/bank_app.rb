@@ -1,15 +1,14 @@
 class BankApp
 	include HTTParty
-	format :json
-  	base_uri "localhost:4000"#Rails.secrets.bank_app_url
+	# format :json
+	# base_uri "http://localhost:4000"#Rails.secrets.bank_app_url
 
-  	#to protect access we can add IP address validation with AWS
-  	def self.sign_up(id, phone_number, route, params)
-  		options = {
-  			{headers: {phone_number: phone_number}
-  		}
-
-  		options.merge!(params: params)
-  		self.class.post("/sign-up", options)
-  	end
+	#to protect access we can add IP address validation with AWS
+	def self.sign_up(phone_number)
+		# options = {params: {phone_number: phone_number}}
+    options = {
+      body: {phone_number: phone_number}
+    }
+		HTTParty.post("http://localhost:4000/sign-up", options)
+	end
 end
